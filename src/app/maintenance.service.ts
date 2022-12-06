@@ -13,4 +13,12 @@ export class MaintenanceService {
   getMessage(): Observable<string> {
     return this.http.get('http://localhost:8080/message', {responseType: 'text'});
   }
+
+  setMessage(message: string): Observable<any> {
+    return this.http.put('http://localhost:8080/message', {}, {params: {message}});
+  }
+
+  resetMessage() {
+    return this.http.put('http://localhost:8080/reset', {});
+  }
 }

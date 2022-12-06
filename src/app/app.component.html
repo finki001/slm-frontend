@@ -1,2 +1,7 @@
 <div style="width: 100%;height: 100px;" [style.background-color]="backgroundColor">
 </div>
+
+<label for="message">Message: </label>
+<input id="message" type="text" [formControl]="message" #messageInput><br>
+<button (click)="setMessage(messageInput.value)">Set Message</button>
+<button (click)="resetMessage()">Reset Message</button>
