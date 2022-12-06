@@ -1,7 +1,14 @@
-<div style="width: 100%;height: 100px;" [style.background-color]="backgroundColor">
+<div style="width: 100%;height: 100px; display: flex;justify-content: center;align-items: center;" [style.background-color]="backgroundColor">
+  <h1><ng-container *ngIf="messageResponse;else success">Fehlermeldung: {{messageResponse}}</ng-container></h1>
 </div>
 
-<label for="message">Message: </label>
-<input id="message" type="text" [formControl]="message" #messageInput><br>
-<button (click)="setMessage(messageInput.value)">Set Message</button>
-<button (click)="resetMessage()">Reset Message</button>
+<div style="padding: 20px;">
+<mat-form-field appearance="fill">
+  <mat-label>Message</mat-label>
+  <input id="message" type="text" [formControl]="message" #messageInput matInput (keyup.enter)="setMessage(messageInput.value)"><br>
+</mat-form-field><br>
+<button (click)="setMessage(messageInput.value)" mat-raised-button color="primary">Set Message</button><br>
+<button (click)="resetMessage()" mat-raised-button color="warn" style="margin-top: 20px;">Reset Message</button>
+</div>
+
+<ng-template #success>Alles gut</ng-template>

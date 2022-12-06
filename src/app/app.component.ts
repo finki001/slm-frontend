@@ -17,21 +17,28 @@ export class AppComponent implements OnDestroy {
 
   message = new FormControl();
 
+  messageResponse = '';
+
   constructor(private maintenanceService: MaintenanceService) {
     this.subscription = timer(0, 5000).pipe(
       switchMap(() => this.maintenanceService.getMessage())
-    ).subscribe(message => this.backgroundColor = !message ? 'green' : 'red');
+    ).subscribe(message => {
+      this.messageResponse = message;
+      this.backgroundColor = !message ? 'green' : 'red';
+    });
 
-    maintenanceService.getMessage().subscribe(console.log);
+    maintenanceService.getMessage().subscribe(()=>{});
   }
 
   setMessage(message: string) {
-    this.maintenanceService.setMessage(message).subscribe(console.log);
+    this.maintenanceService.setMessage(message).subscribe(() => {
+    });
     this.message.setValue('');
   }
 
   resetMessage() {
-    this.maintenanceService.resetMessage().subscribe(console.log);
+    this.maintenanceService.resetMessage().subscribe(() => {
+    });
   }
 
   ngOnDestroy(): void {
